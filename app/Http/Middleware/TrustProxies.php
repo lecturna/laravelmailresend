@@ -4,37 +4,22 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Http\Middleware;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Middleware\TrustProxies as Middleware;
 
 class TrustProxies extends Middleware
 {
-     /**
+    /**
      * The trusted proxies for this application.
      *
-     * @var array|string
+     * @var array|string|null
      */
-    protected $proxies = '*';
+    protected $proxies = '*'; // You can specify IP addresses or CIDR notation here
 
     /**
-     * The headers that should be used to detect proxies.
+     * The headers that should be used to determine the client IP address.
      *
      * @var int
      */
-    protected $headers = Request::HEADER_X_FORWARDED_FOR | Request::HEADER_X_FORWARDED_HOST | Request::HEADER_X_FORWARDED_PORT | Request::HEADER_X_FORWARDED_PROTO;
-
-    /**
-     * Determine if the request is coming from a trusted proxy.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return bool
-     */
-    public function handle(Request $request, Closure $next): Response
-    {
-        if (! $this->isTrustedProxy($request)) {
-            // Handle untrusted proxy requests
-            // e.g., log the request or deny access
-        }
-        return $next($request);
-    }
+    protected $headers = Request::HEADER_X_FORWARDED_FOR | Request::HEADER_X_FORWARDED_HOST | Request::HEADER_X_FORWARDED_PORT | Request::HEADER_X_FORWARDED_PROTO | Request::HEADER_X_FORWARDED_AWS_ELB;
 }
