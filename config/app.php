@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://laravelmailresend.vercel.app/'),
+    'url' => env('APP_URL', 'https://laravelmailresend-9ycxdleux-lecturnas-projects.vercel.app/'),
 
     /*
     |--------------------------------------------------------------------------
